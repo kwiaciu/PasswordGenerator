@@ -13,7 +13,7 @@ export class NumberInput extends React.Component {
 
   render() {
     return (
-        <input onChange={this.handleUserInput} min='0' max='50' type="number"  />
+        <input name={this.props.name} onChange={this.handleUserInput} min='0' max='50' type="number"  />
     );
   }
 }

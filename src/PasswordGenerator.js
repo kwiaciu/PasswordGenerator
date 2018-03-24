@@ -78,7 +78,7 @@ export class PasswordGenerator extends React.Component {
 		return(
 			<div>
 				<DividerWithHeader header='How many characters?'/>
-					<NumberInput onUserInputChange={this.changePasswordLength}/>
+					<NumberInput name='firstInput' onUserInputChange={this.changePasswordLength}/>
 					<ul>
 						<li>Password length: {this.state.passwordLength}</li>
 						<li>How many numbers at the end: {this.state.howManyNumbers}</li>
@@ -96,8 +96,8 @@ export class PasswordGenerator extends React.Component {
 					</ul>
 					
 				</div>
-					<p>Add numbers to the end: <NumberInput onUserInputChange={this.changeHowManyNumbers}/></p>
-					<p>Capitalize letters at the beginning: <NumberInput onUserInputChange={this.changeHowManyBig}/></p>
+					<p>Add numbers to the end: <NumberInput name='secondInput' onUserInputChange={this.changeHowManyNumbers}/></p>
+					<p>Capitalize letters at the beginning: <NumberInput name='thirdInput' onUserInputChange={this.changeHowManyBig}/></p>
 				<div>
 					<CheckBox type='checkbox' checked={this.state.addNumber} onUserInputChange={this.changeState}/>
 				</div>
