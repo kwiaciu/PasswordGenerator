@@ -5,70 +5,54 @@ import {PasswordGeneratorLogic} from './PasswordGeneratorLogic.js';
 import {CheckBox} from './CheckBox';
 
 export class PasswordGenerator extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = { 	
+		state = { 	
 			passwordLength: '',
 			howManyNumbers: '',
 			howManyBig: '',
 			addNumber: false
 		};
 
-		this.changePasswordLength = this.changePasswordLength.bind(this);
-		this.changeHowManyNumbers = this.changeHowManyNumbers.bind(this);
-		this.changeHowManyBig = this.changeHowManyBig.bind(this);
-		this.changeState = this.changeState.bind(this);
-
-
-	}
-
-	changePasswordLength(newNumber) {
+	changePasswordLength = (newNumber, name) => {
 		if (newNumber > 1) {
 			this.setState({
-			passwordLength: newNumber
-			})
-		}	;
+			[name]: newNumber
+			});
+		};
 	}
 
-	changeHowManyNumbers(newNumber) {
+
+	changeStateNumberInput = (newNumber, name) => {
 		this.setState({
-			howManyNumbers: newNumber
+			[name]: newNumber
 		});
 	}
 
-	changeHowManyBig(newNumber) {
-		this.setState({
-			howManyBig: newNumber
-		});
-	}
-
-	changeState() {
-		const potato = this.state.addNumber == true ? false : true;
+	changeStateCheckbox = (isChecked, name) => {
+		// const potato = this.state.addNumber == true ? false : true;
 		this.setState ({
-			addNumber: potato
+			[name]: isChecked
 		})
 	}		
 
-	createRandomPassword(numberOf) {
+	createRandomPassword = (numberOf) => {
 		var objectNew = new PasswordGeneratorLogic(numberOf);
 		var pass = objectNew.totallyRandom(objectNew.passwordLen, objectNew.charPool(true,true,true,true));
 		return pass;
 	}
 
-	createWordsPassword(numberOf) {
+	createWordsPassword = (numberOf) => {
 		var objectNew = new PasswordGeneratorLogic(numberOf);
 		var pass = objectNew.another();
 		return pass;
 	}
 
-	createPIN(numberOf) {
+	createPIN = (numberOf) => {
 		var objectNew = new PasswordGeneratorLogic(numberOf);
 		var pass = objectNew.totallyRandom(objectNew.passwordLen, objectNew.charPool(false,false,false,true));
 		return pass;
 	}
 
-	createMixedPass(numberOf) {
+	createMixedPass = (numberOf) => {
 		var objectNew = new PasswordGeneratorLogic(numberOf);
 		var pass = objectNew.mixed();
 		return pass;
@@ -78,14 +62,14 @@ export class PasswordGenerator extends React.Component {
 		return(
 			<div>
 				<DividerWithHeader header='How many characters?'/>
-					<NumberInput name='firstInput' onUserInputChange={this.changePasswordLength}/>
-					<ul>
-						<li>Password length: {this.state.passwordLength}</li>
-						<li>How many numbers at the end: {this.state.howManyNumbers}</li>
-						<li>How many big letters at the beginning: {this.state.howManyBig}</li>
-
-					</ul>
-
+				<div class="slider">
+					<NumberInput name='passwordLength' onUserInputChange={this.changePasswordLength}/>
+					<div class="slider-label">{this.state.passwordLength}</div>
+				</div>
+						{//<p>How many numbers at the end: {this.state.howManyNumbers}</p>
+						//<li>How many big letters at the beginning: {this.state.howManyBig}</li>
+					}
+					
 				<div>
 					<h3>Passwords:</h3>
 					<ul>
@@ -94,13 +78,15 @@ export class PasswordGenerator extends React.Component {
 						<li>{this.createPIN(this.state.passwordLength)}</li>
 						<li>{this.createMixedPass(this.state.passwordLength)}</li>
 					</ul>
-					
 				</div>
-					<p>Add numbers to the end: <NumberInput name='secondInput' onUserInputChange={this.changeHowManyNumbers}/></p>
-					<p>Capitalize letters at the beginning: <NumberInput name='thirdInput' onUserInputChange={this.changeHowManyBig}/></p>
-				<div>
-					<CheckBox type='checkbox' checked={this.state.addNumber} onUserInputChange={this.changeState}/>
-				</div>
+				{	
+				//	<p>Add numbers to the end: <NumberInput name='howManyNumbers' onUserInputChange={this.changeStateNumberInput}/></p>
+				//	<p>Capitalize letters at the beginning: <NumberInput name='howManyBig' onUserInputChange={this.changeStateNumberInput}/></p>
+				
+				//<div>
+				//	<CheckBox name='addNumber' checked={this.state.addNumber} onUserInputChange={this.changeStateCheckbox}/>
+				//</div>
+				}
 			</div>
 		);
 	}

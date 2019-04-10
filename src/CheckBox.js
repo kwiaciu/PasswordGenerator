@@ -2,13 +2,9 @@ import React from 'react';
 
 
 export class CheckBox extends React.Component {
-  constructor(props){
-    super(props);    
-    this.handleUserInput=this.handleUserInput.bind(this);
-  }
-  
-  handleUserInput(e) {
-      this.props.onUserInputChange(e.target.value);
+
+  handleUserInput = (e) => {
+      this.props.onUserInputChange(e.target.checked, e.target.name);
   }
 
   render() {
@@ -17,9 +13,9 @@ export class CheckBox extends React.Component {
         <label>
           Add numbers?
           <input
-            // name={this.props.name}
-            type={this.props.type}
-            value={this.props.value}
+            name={this.props.name}
+            type='checkbox'
+            checked={this.props.checked}
             onChange={this.handleUserInput} />
         </label>
       </form>
