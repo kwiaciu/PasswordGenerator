@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  word-break: break-word;
 }
 
 .App-logo {
@@ -12,17 +13,27 @@
   height: 60px;
   padding: 20px;
   color: white;
+  /* vertical-align: center; */
 }
 
 .App-title {
   font-size: 1.5em;
+    margin: 0px;
+  text-align: center;
 }
 
 .App-intro {
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@media (min-width: 340px) {
+  .App-title {
+    line-height: 60px;
+  }
+}
+
+@media (min-width: 700px) {
+  .App-title {
+font-size: 35px
+;  }
 }

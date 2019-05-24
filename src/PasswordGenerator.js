@@ -2,11 +2,12 @@ import React from 'react';
 import {DividerWithHeader} from './DividerWithHeader.js';
 import {NumberInput} from './NumberInput';
 import {PasswordGeneratorLogic} from './PasswordGeneratorLogic.js';
-import {CheckBox} from './CheckBox';
+import Tooltip from './tooltip';
+// import {CheckBox} from './CheckBox';
 
 export class PasswordGenerator extends React.Component {
 		state = { 	
-			passwordLength: '',
+			passwordLength: '12',
 			howManyNumbers: '',
 			howManyBig: '',
 			addNumber: false
@@ -59,12 +60,22 @@ export class PasswordGenerator extends React.Component {
 	}
 
 	render() {
+		const first = this.createRandomPassword(this.state.passwordLength);
+		const firstDesc = 'Password made from random letters, numbers and special characters';
+		const second = this.createWordsPassword(this.state.passwordLength);
+		const secondDesc = 'Password made by combining random english words'
+		const third = this.createPIN(this.state.passwordLength);
+		const thirdDesc = 'Password made by combining random numbers'
+		const fourth = this.createMixedPass(this.state.passwordLength);
+		const fourthDesc = 'Password made by combining randoms consonanst with random vowels'
+
+
 		return(
-			<div>
+			<div className="passwords">
 				<DividerWithHeader header='How many characters?'/>
-				<div class="slider">
+				<div className="slider">
 					<NumberInput name='passwordLength' onUserInputChange={this.changePasswordLength}/>
-					<div class="slider-label">{this.state.passwordLength}</div>
+					<div className="slider-label">{this.state.passwordLength}</div>
 				</div>
 						{//<p>How many numbers at the end: {this.state.howManyNumbers}</p>
 						//<li>How many big letters at the beginning: {this.state.howManyBig}</li>
@@ -73,10 +84,10 @@ export class PasswordGenerator extends React.Component {
 				<div>
 					<h3>Passwords:</h3>
 					<ul>
-						<li>{this.createRandomPassword(this.state.passwordLength)}</li>
-						<li>{this.createWordsPassword(this.state.passwordLength)}</li>
-						<li>{this.createPIN(this.state.passwordLength)}</li>
-						<li>{this.createMixedPass(this.state.passwordLength)}</li>
+						<li><Tooltip text={first} tooltipText={firstDesc}/></li>
+						<li><Tooltip text={second} tooltipText={secondDesc}/></li>
+						<li><Tooltip text={third} tooltipText={thirdDesc}/></li>
+						<li><Tooltip text={fourth} tooltipText={fourthDesc}/></li>
 					</ul>
 				</div>
 				{	
