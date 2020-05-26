@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   word-break: break-word;
+  width: 100vw;
 }
 
 .App-logo {
@@ -18,7 +19,7 @@
 
 .App-title {
   font-size: 1.5em;
-    margin: 0px;
+  margin: 0px;
   text-align: center;
 }
 
@@ -26,14 +27,22 @@
   font-size: large;
 }
 
+input {
+  height: 40px;
+}
+
 @media (min-width: 340px) {
   .App-title {
     line-height: 60px;
+  }
+
+  input {
+    width: 250px;
   }
 }
 
 @media (min-width: 700px) {
   .App-title {
-font-size: 35px
-;  }
+    font-size: 35px;
+  }
 }
